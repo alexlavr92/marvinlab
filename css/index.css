@@ -1269,17 +1269,17 @@ header.show .header-hidden {
 
 .line-slider-slide:nth-child(3n+1) {
   background-color: #EEE5D6;
-  background-image: url(../../media/img/line1.png);
+  background-image: url(../media/img/line1.png);
 }
 
 .line-slider-slide:nth-child(3n+2) {
   background-color: #ffffff;
-  background-image: url(../../media/img/line2.png);
+  background-image: url(../media/img/line2.png);
 }
 
 .line-slider-slide:nth-child(3n+3) {
   background-color: #F6F6F6;
-  background-image: url(../../media/img/line3.png);
+  background-image: url(../media/img/line3.png);
   border: 1px solid #000000;
 }
 
@@ -1776,7 +1776,7 @@ header.show .header-hidden {
 }
 @media screen and (max-width: 767px) {
   .grid-right .grid-item:nth-child(3) .text {
-    width: 34vw;
+    width: 35vw;
     min-width: auto;
     max-width: 130px;
   }

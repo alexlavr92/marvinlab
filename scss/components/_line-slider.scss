@@ -97,18 +97,18 @@
 
 .line-slider-slide:nth-child(3n+1) {
     background-color: #EEE5D6;
-    background-image: url(../../media/img/line1.png);
+    background-image: url(../media/img/line1.png);
 
 }
 
 .line-slider-slide:nth-child(3n+2) {
     background-color: $color-bg-second;
-    background-image: url(../../media/img/line2.png);
+    background-image: url(../media/img/line2.png);
 
 }
 
 .line-slider-slide:nth-child(3n+3) {
     background-color: $color-bg;
-    background-image: url(../../media/img/line3.png);
+    background-image: url(../media/img/line3.png);
     border: 1px solid $color-main;
 }
