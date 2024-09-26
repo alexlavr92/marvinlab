@@ -1263,7 +1263,7 @@ header.show .header-hidden {
 }
 @media screen and (max-width: 767px) {
   .line-slider-slide .text {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
 }
 
@@ -1648,6 +1648,7 @@ header.show .header-hidden {
 }
 @media screen and (max-width: 767px) {
   .grid-right .grid-item:nth-child(2) .text {
+    width: 31vw;
     min-width: auto;
     max-width: 120px;
   }
@@ -1669,7 +1670,7 @@ header.show .header-hidden {
 }
 @media screen and (max-width: 767px) {
   .grid-right .grid-item:nth-child(2) .text > div:first-child {
-    font-size: 3rem;
+    font-size: 4rem;
   }
 }
 .grid-right .grid-item:nth-child(2) .text > div:last-child {
@@ -1716,7 +1717,7 @@ header.show .header-hidden {
 }
 @media screen and (max-width: 767px) {
   .grid-right .grid-item:nth-child(2) .text > div:last-child > span:last-child {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 }
 .grid-right .grid-item:nth-child(3) {
@@ -1775,9 +1776,9 @@ header.show .header-hidden {
 }
 @media screen and (max-width: 767px) {
   .grid-right .grid-item:nth-child(3) .text {
-    width: 31vw;
+    width: 34vw;
     min-width: auto;
-    max-width: 120px;
+    max-width: 130px;
   }
 }
 .grid-right .grid-item:nth-child(3) .text > div:first-child {
@@ -1797,8 +1798,8 @@ header.show .header-hidden {
 }
 @media screen and (max-width: 767px) {
   .grid-right .grid-item:nth-child(3) .text > div:first-child {
-    font-size: 3rem;
-    line-height: 100%;
+    font-size: 4rem;
+    line-height: 60%;
   }
 }
 .grid-right .grid-item:nth-child(3) .text > div:last-child {
