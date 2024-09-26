@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Doorman';
+    src: url('../fonts/Doorman.otf');
+    src: local('DoorMan'), local('DoorMan'),
+        url('../fonts/Doorman.otf') format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Flex';
+    src: url('../fonts/RobotoFlex-Regular.eot');
+    src: local('Roboto Flex Regular'), local('RobotoFlex-Regular'),
+        url('../fonts/RobotoFlex-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/RobotoFlex-Regular.woff2') format('woff2'),
+        url('../fonts/RobotoFlex-Regular.woff') format('woff'),
+        url('../fonts/RobotoFlex-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

@@ -1,0 +1,114 @@
+.line-slider-container {
+    margin: 0 -3vw;
+    padding: 0 3vw;
+
+    @media screen {
+        @media (max-width: 1700px) {
+            margin: 0 -1.5vw;
+            padding: 0 1.5vw;
+        }
+
+        @media (max-width: 1199px) {
+            margin: 0 -10px;
+            padding: 0 10px;
+        }
+    }
+}
+
+
+.line-slider-slide {
+    padding: 45px 30px;
+    border-radius: 40px;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 100%;
+
+    @media screen {
+        @media (max-width: 1250px) {
+            padding: 35px 30px;
+        }
+
+        @media (max-width: 1199px) {
+            width: 60%;
+            border-radius: 20px;
+        }
+
+        @media (max-width: 767px) {
+            width: 55%;
+            padding: 20px 10px;
+        }
+    }
+
+    .title {
+        font-family: $font-title;
+        padding-bottom: 20px;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+
+        @media screen {
+            @media (min-width: 2000px) {
+                font-size: 1.3rem;
+            }
+
+            @media (max-width: 1250px) {
+                font-size: 1rem;
+            }
+
+            @media (max-width: 1199px) {
+                font-size: 1.3rem;
+                padding-bottom: 15px;
+            }
+
+            @media (max-width: 767px) {
+                font-size: .8rem;
+                padding-bottom: 10px;
+            }
+        }
+    }
+
+    .text {
+        font-size: .85rem;
+        color: #656565;
+
+        @media screen {
+            @media (min-width: 2000px) {
+                font-size: .9rem;
+            }
+
+            @media (max-width: 1420px) {
+                font-size: .8rem;
+            }
+
+            @media (max-width: 1250px) {
+                font-size: .7rem;
+            }
+
+            @media (max-width: 1199px) {
+                font-size: .9rem;
+            }
+
+            @media (max-width: 767px) {
+                font-size: .6rem;
+            }
+        }
+    }
+
+}
+
+.line-slider-slide:nth-child(3n+1) {
+    background-color: #EEE5D6;
+    background-image: url(../../media/img/line1.png);
+
+}
+
+.line-slider-slide:nth-child(3n+2) {
+    background-color: $color-bg-second;
+    background-image: url(../../media/img/line2.png);
+
+}
+
+.line-slider-slide:nth-child(3n+3) {
+    background-color: $color-bg;
+    background-image: url(../../media/img/line3.png);
+    border: 1px solid $color-main;
+}
