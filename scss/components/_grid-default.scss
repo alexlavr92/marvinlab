@@ -345,7 +345,7 @@
                 // }
 
                 >div:first-child {
-                    font-family: 'Doorman';
+                    font-family: $font-title;
                     font-size: 6rem;
                     line-height: 52%;
 
@@ -367,7 +367,7 @@
                 >div:last-child {
                     @include flex-column;
                     gap: 9px;
-                    font-family: 'Doorman';
+                    font-family: $font-title;
                     text-transform: uppercase;
 
                     @media screen {
@@ -464,7 +464,7 @@
                 }
 
                 >div:first-child {
-                    font-family: 'Doorman';
+                    font-family: $font-title;
                     font-size: 6rem;
                     line-height: 52%;
 
@@ -487,7 +487,7 @@
                 >div:last-child {
                     @include flex-column;
                     gap: 9px;
-                    font-family: 'Doorman';
+                    font-family: $font-title;
                     text-transform: uppercase;
 
                     @media screen {

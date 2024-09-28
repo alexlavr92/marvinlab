@@ -29,6 +29,12 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     position: relative;
+    @include flex-column;
+}
+
+main {
+    flex: 1;
+    width: 100%;
 }
 
 section+section {
@@ -134,11 +140,8 @@ h1 {
 
 h2 {
     line-height: 100%;
-    color: $color-second;
+    // color: $color-second;
     text-transform: uppercase;
-    font-weight: 900;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-
 }
 
 h3 {

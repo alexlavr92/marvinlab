@@ -43,7 +43,10 @@ const BlockScroll = {
 }
 // ------------------------------------
 
+
 jQuery(document).ready(function ($) {
+
+
 
     // Инициализация плагина анимации
     AOS.init({
@@ -215,4 +218,207 @@ jQuery(document).ready(function ($) {
         })
     }
     // ------------------------------------
+
+    // Инициализация работы с анализами
+    const InitAnalyzesSwitcher = {
+        defaultsOptions: {
+            AnalyzeGroup: 'analyzes-group-item',
+            AnalyzesAllInfo: 'analyzes-wrapper-allInfo',
+            AnalyzeItem: 'analyzes-item',
+            AnalyzeInfoWrapper: 'analyzes-info-wrapper',
+            AnalyzeSingle: 'analyzes-single-wrapper',
+            BackLink: 'analyze-back',
+            windowWidth: document.body.clientWidth,
+
+        },
+        checkAdaptive: function (width) {
+            this.defaultsOptions.windowWidth = width
+            const NowWidth = this.defaultsOptions.windowWidth
+            // console.log(NowWidth)
+            if (NowWidth < 1200) {
+                if (!$('.analyzes-right').find('.analyzes-main').length)
+                    $('.analyzes-main').insertAfter('.analyzes-right > .heading-wrapper')
+                // $('.' + this.defaultsOptions.AnalyzeGroup + ' > .analyzes-name.active').addClass('active-mob')
+                if (!$('.' + this.defaultsOptions.AnalyzeGroup + ' > .analyzes-name.active').next('.' + this.defaultsOptions.AnalyzesAllInfo + '').length) {
+                    const mobActiveGroupItem = $('.' + this.defaultsOptions.AnalyzeGroup + ' > .analyzes-name.active')
+                    $('.' + this.defaultsOptions.AnalyzesAllInfo + '').insertAfter(mobActiveGroupItem)
+                }
+                if (!$('.' + this.defaultsOptions.AnalyzeGroup + ' > .analyzes-name').hasClass('active-mob')) {
+                    $('.' + this.defaultsOptions.AnalyzeGroup + ' > .analyzes-name.active').addClass('active-mob')
+                    $('.' + this.defaultsOptions.AnalyzesAllInfo + '').hide().slideDown()
+                }
+            }
+            else {
+                $('.' + this.defaultsOptions.AnalyzeGroup + ' > .analyzes-name.active-mob').removeClass('active-mob')
+                if (!$('.analyzes-right > .' + this.defaultsOptions.AnalyzesAllInfo + '').length)
+                    $('.' + this.defaultsOptions.AnalyzesAllInfo + '').appendTo('.analyzes-right')
+                if (!$('.analyzes-wrapper > .analyzes-main').length)
+                    $('.analyzes-main').prependTo('.analyzes-wrapper')
+            }
+        },
+        init: function (options) {
+            var options = $.extend(this.defaultsOptions, options)
+            this.events(options)
+            this.checkAdaptive(options.windowWidth)
+        },
+        events: function (options) {
+            const $thisObj = this
+            $('body').on('click', '.' + options.AnalyzeItem + '', function (e) {
+                e.preventDefault()
+                const $this = $(this),
+                    $thisInfoWrapper = $this.closest('.' + options.AnalyzeInfoWrapper + ''),
+                    $thisAnalyzeSingle = $thisInfoWrapper.siblings('.' + options.AnalyzeSingle + '')
+
+                // console.log($thisAnalyzeSingle)
+                $thisInfoWrapper.hide({
+                    duration: 0,
+                    complete: function () {
+                        $thisAnalyzeSingle.fadeIn({
+                            duration: 500,
+                            start: function () {
+                                $(this).css('display', 'flex')
+                            }
+                        });
+                    }
+                })
+            })
+            $('body').on('click', '.' + options.AnalyzeSingle + ' .' + options.BackLink + '', function (e) {
+                e.preventDefault()
+                const $this = $(this),
+                    $thisAnalyzeSingle = $this.closest('.' + options.AnalyzeSingle + ''),
+                    $thisInfoWrapper = $thisAnalyzeSingle.siblings('.' + options.AnalyzeInfoWrapper + '')
+                // console.log($thisInfoWrapper)
+                $thisAnalyzeSingle.hide({
+                    duration: 0,
+                    complete: function () {
+                        $thisInfoWrapper.fadeIn({
+                            duration: 500,
+                            start: function () {
+                                $(this).css('display', 'flex')
+                            }
+                        });
+                    }
+                })
+            })
+            $('.' + options.AnalyzeGroup + ' .analyzes-name').on('click', function (e) {
+                e.preventDefault()
+                const $this = $(this)
+                // console.log($this)
+                $this.parent('.' + options.AnalyzeGroup + '').siblings().find('.active').removeClass('active')
+                $this.addClass('active')
+                if (options.windowWidth < 1200) {
+                    $this.toggleClass('active-mob')
+                    if (!$this.hasClass('active-mob'))
+                        $('.' + options.AnalyzesAllInfo + '').slideUp()
+                    if ($this.hasClass('active-mob')) {
+                        $this.parent('.' + options.AnalyzeGroup + '').siblings().find('.active-mob').removeClass('active-mob')
+                    }
+                }
+
+
+                const link = './analyze-content.html'
+
+                // ajax запрос для обновления контента
+                $.ajax({
+                    url: link,
+                    /*   cache: false, */
+                    dataType: 'html',
+                    success: function (response) {
+                        const ContentWrapper = $(response)
+                        if (options.windowWidth >= 1200) {
+                            $('body').find('.analyzes-right > .' + options.AnalyzesAllInfo + '> *').remove()
+                            $(ContentWrapper).appendTo('.analyzes-right > .' + options.AnalyzesAllInfo + '')
+                            console.log($(ContentWrapper))
+                            $('body').find('.' + options.AnalyzesAllInfo + '').hide().fadeIn(500)
+                        }
+                        else {
+                            if (!$this.next('.' + options.AnalyzesAllInfo + '').length) {
+                                $('body').find('.' + options.AnalyzesAllInfo + '> *').remove()
+                                $(ContentWrapper).appendTo('.' + options.AnalyzesAllInfo + '')
+                                $('.' + options.AnalyzesAllInfo + '').insertAfter($this)
+                            }
+
+                            // console.log($('.' + options.AnalyzesAllInfo + ''))
+                            if ($this.hasClass('active-mob'))
+                                $('.' + options.AnalyzesAllInfo + '').hide().slideDown({
+                                    start: function () {
+                                        const $thisOffsetTop = $this.offset().top - $('header > .new-container').height()
+                                        console.log($thisOffsetTop)
+                                        $('html, body').scrollTop($thisOffsetTop - 40);
+                                    }
+                                })
+                        }
+                    },
+                    error: function (request, status, error) {
+                        // console.log(request.status)
+                        errorShow(request.status)
+                    },
+                    statusCode: {
+                        200: function () {
+                            /*  console.log($(this)) */
+                        },
+                        404: function () { // выполнить функцию если код ответа HTTP 404
+                            let Status = '404'
+                            errorShow(Status)
+                        },
+                        403: function () { // выполнить функцию если код ответа HTTP 403
+                            let Status = '403'
+                            errorShow(Status)
+                        },
+                        408: function () { // превышено время
+                            let Status = '408'
+                            errorShow(Status)
+                        },
+                        504: function () { // превышено время
+                            alert("доступ запрещен");
+                            let Status = '504'
+                            errorShow(Status)
+                        }
+                    }
+                });
+            })
+            $(window).on('resize', function () {
+                if (options.windowWidth != document.body.clientWidth) {
+                    options.windowWidth = document.body.clientWidth
+                    $thisObj.checkAdaptive(options.windowWidth)
+                    // console.log(options.windowWidth)
+                }
+            })
+        }
+    }
+    if ($('.analyzes-group-item').length)
+        InitAnalyzesSwitcher.init()
+    // ------------------------------------
+
+    // Инициализация аккордеонов
+    const InitAccordeon = {
+        defaultsOptions: {
+            accordeonWrapper: 'accordeon-wrapper'
+        },
+        init: function (options) {
+            var options = $.extend(this.defaultsOptions, options)
+            this.events(options)
+        },
+        events: function (options) {
+            $('body').on('click', '.' + options.accordeonWrapper + ' .accordeon-title', function (e) {
+                e.preventDefault()
+                const $this = $(this),
+                    $thisAccordeonWrapper = $this.parent('.' + options.accordeonWrapper + ''),
+                    $thisAccordeonContent = $this.next('.accordeon-content')
+                // console.log($this, $thisAccordeonWrapper, $thisAccordeonContent)
+                $thisAccordeonContent.slideToggle({
+                    start: function () {
+                        !$thisAccordeonWrapper.hasClass('active')
+                            ? $thisAccordeonWrapper.addClass('active')
+                            : $thisAccordeonWrapper.removeClass('active')
+                    }
+                })
+            })
+        }
+    }
+
+    if ($('.accordeon-wrapper').length)
+        InitAccordeon.init()
+    // ------------------------------------
+
 })
